@@ -1,0 +1,11 @@
+{%extends 'base.html' %}
+{%block content%}
+<div class="form-wrapper">
+	<div class="form-title">Написать Пост</div>
+	<form action="" method="POST" class="form">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit" class="form_btn_submit">отправить</button>
+	</form>
+</div>
+{%endblock%}

@@ -1,0 +1,44 @@
+{%extends 'base.html' %}
+{%block content%}
+<div class="title maintitle search_title">
+	Результаты поиска для {{query}}
+</div>
+
+<div class="cards-wrapper">
+	{%for card in page_obj%}
+	<div class="card">
+		<div class="location-title">{{card.name}}</div>
+		<div class="card-descr">{{card.description}}</div>
+		{%if card.tier == 'A'%}
+		<div class="tier a">{{card.tier}}</div>
+		{%elif card.tier == 'B'%}
+		<div class="tier b">{{card.tier}}</div>
+		{%elif card.tier == 'C'%}
+		<div class="tier c">{{card.tier}}</div>
+		{%elif card.tier == 'D'%}
+		<div class="tier d">{{card.tier}}</div>
+		{%elif card.tier == 'E'%}
+		<div class="tier e">{{card.tier}}</div>
+		{%endif%}
+	</div>
+	{%endfor%}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?query={{query}}&page=1">&laquo; first</a>
+            <a href="?query={{query}}&page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?query={{query}}&page={{ page_obj.next_page_number }}">next</a>
+            <a href="?query={{query}}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{%endblock%}
